@@ -1,0 +1,276 @@
+-- =========================================
+-- 1. ELIMINAR TABLAS
+-- =========================================
+DROP TABLE tEnfermedadEnElDiagnostico CASCADE CONSTRAINTS;
+DROP TABLE tEspecialidadDelMedico CASCADE CONSTRAINTS;
+DROP TABLE tDiagnostico CASCADE CONSTRAINTS;
+DROP TABLE tEnfermedad CASCADE CONSTRAINTS;
+DROP TABLE tEspecialidad CASCADE CONSTRAINTS;
+DROP TABLE tMedico CASCADE CONSTRAINTS;
+DROP TABLE tPaciente CASCADE CONSTRAINTS;
+
+-- =========================================
+-- 2. CREAR TABLAS
+-- =========================================
+
+CREATE TABLE tPaciente
+(
+codP VARCHAR2(4) PRIMARY KEY,
+tipoDocP VARCHAR2(15),
+nroDocP VARCHAR2(12),
+paternoP VARCHAR2(50),
+maternoP VARCHAR2(50),
+nombresP VARCHAR2(50),
+fechaNacimientoP DATE,
+generoP CHAR(1)
+);
+
+CREATE TABLE tMedico
+(
+codM VARCHAR2(4) PRIMARY KEY,
+tipoDocM VARCHAR2(15),
+nroDocM VARCHAR2(12),
+paternoM VARCHAR2(50),
+maternoM VARCHAR2(50),
+nombresM VARCHAR2(50),
+celularM VARCHAR2(12),
+fechaNacimientoM DATE,
+generoM CHAR(1)
+);
+
+CREATE TABLE tEspecialidad
+(
+codEsp VARCHAR2(4) PRIMARY KEY,
+nombreEsp VARCHAR2(70),
+descripcionEsp VARCHAR2(100)
+);
+
+CREATE TABLE tEnfermedad
+(
+codE VARCHAR2(4) PRIMARY KEY,
+nombreE VARCHAR2(50),
+descricionE VARCHAR2(100)
+);
+
+CREATE TABLE tDiagnostico
+(
+codD VARCHAR2(4) PRIMARY KEY,
+fechaHoraD TIMESTAMP,
+descripcionD VARCHAR2(100),
+codP VARCHAR2(4),
+codM VARCHAR2(4),
+FOREIGN KEY (codP) REFERENCES tPaciente (codP),
+FOREIGN KEY (codM) REFERENCES tMedico (codM)
+);
+
+CREATE TABLE tEspecialidadDelMedico
+(
+codEspM VARCHAR2(4) PRIMARY KEY,
+codEsp VARCHAR2(4),
+codM VARCHAR2(4),
+fechaDeObtencionDeLaEspecialidadEspM DATE,
+FOREIGN KEY (codEsp) REFERENCES tEspecialidad (codEsp),
+FOREIGN KEY (codM) REFERENCES tMedico (codM)
+);
+
+CREATE TABLE tEnfermedadEnElDiagnostico
+(
+codED VARCHAR2(4) PRIMARY KEY,
+codE VARCHAR2(4),
+codD VARCHAR2(4),
+FOREIGN KEY (codE) REFERENCES tEnfermedad (codE),
+FOREIGN KEY (codD) REFERENCES tDiagnostico (codD)
+);
+
+-- =========================================
+-- 3. INSERTAR DATOS 
+-- =========================================
+-- =========================================
+-- PACIENTES 
+-- =========================================
+INSERT INTO tPaciente VALUES('P03','DNI','33445566','García','López','Carlos', TO_DATE('15-05-1985','DD-MM-YYYY'),'M');
+INSERT INTO tPaciente VALUES('P04','DNI','44556677','Martínez','Castro','Lucía', TO_DATE('22-08-1992','DD-MM-YYYY'),'F');
+INSERT INTO tPaciente VALUES('P05','DNI','55667788','Torres','Mendoza','Raúl', TO_DATE('10-01-1978','DD-MM-YYYY'),'M');
+INSERT INTO tPaciente VALUES('P06','DNI','66778899','Rojas','Soto','Mariana', TO_DATE('05-12-2015','DD-MM-YYYY'),'F');
+INSERT INTO tPaciente VALUES('P07','DNI','77889900','Vargas','Peña','Roberto', TO_DATE('30-03-1960','DD-MM-YYYY'),'M');
+INSERT INTO tPaciente VALUES('P08','DNI','88990011','Sánchez','Guerra','Sofía', TO_DATE('12-07-2005','DD-MM-YYYY'),'F');
+INSERT INTO tPaciente VALUES('P09','DNI','99001122','Morales','Luna','Fernando', TO_DATE('18-09-1998','DD-MM-YYYY'),'M');
+INSERT INTO tPaciente VALUES('P10','DNI','12345678','Herrera','Blanco','Diana', TO_DATE('25-11-2010','DD-MM-YYYY'),'F');
+INSERT INTO tPaciente VALUES('P11','DNI','23456789','Castro','Ríos','Hugo', TO_DATE('08-04-1982','DD-MM-YYYY'),'M');
+INSERT INTO tPaciente VALUES('P12','DNI','34567890','Mendoza','Díaz','Paola', TO_DATE('14-06-1995','DD-MM-YYYY'),'F');
+
+-- =========================================
+-- MÉDICOS 
+-- =========================================
+INSERT INTO tMedico VALUES('M3','DNI','44445555','Quispe','Condori','Marco','911111111', TO_DATE('15-03-1980','DD-MM-YYYY'),'M');
+INSERT INTO tMedico VALUES('M4','DNI','55556666','Flores','Vera','Beatriz','922222222', TO_DATE('20-07-1975','DD-MM-YYYY'),'F');
+INSERT INTO tMedico VALUES('M5','DNI','66667777','Tello','Paredes','Ricardo','933333333', TO_DATE('12-01-1982','DD-MM-YYYY'),'M');
+INSERT INTO tMedico VALUES('M6','DNI','77778888','Palomino','Cruz','Elena','944444444', TO_DATE('05-09-1988','DD-MM-YYYY'),'F');
+INSERT INTO tMedico VALUES('M7','DNI','88889999','Cáceres','Lozano','Andrés','955555555', TO_DATE('30-10-1970','DD-MM-YYYY'),'M');
+INSERT INTO tMedico VALUES('M8','DNI','99990000','Ramos','Ibáñez','Karla','966666666', TO_DATE('14-02-1985','DD-MM-YYYY'),'F');
+INSERT INTO tMedico VALUES('M9','DNI','10101010','Solís','Chávez','Gustavo','977777777', TO_DATE('22-11-1972','DD-MM-YYYY'),'M');
+INSERT INTO tMedico VALUES('M10','DNI','20202020','Valdez','Miranda','Rosa','988888888', TO_DATE('08-06-1979','DD-MM-YYYY'),'F');
+INSERT INTO tMedico VALUES('M11','DNI','30303030','Farfán','Arias','Luis','900000001', TO_DATE('19-04-1983','DD-MM-YYYY'),'M');
+INSERT INTO tMedico VALUES('M12','DNI','40404040','Nieto','Benítez','Sonia','900000002', TO_DATE('25-12-1981','DD-MM-YYYY'),'F');
+
+-- =========================================
+-- ESPECIALIDADES 
+-- =========================================
+INSERT INTO tEspecialidad VALUES('Esp5','Gastroenterología','Estómago y sistema digestivo');
+INSERT INTO tEspecialidad VALUES('Esp6','Dermatología','Piel y anexos');
+INSERT INTO tEspecialidad VALUES('Esp7','Ginecología','Salud reproductiva femenina');
+INSERT INTO tEspecialidad VALUES('Esp8','Neurología','Sistema nervioso');
+INSERT INTO tEspecialidad VALUES('Esp9','Oftalmología','Salud ocular');
+INSERT INTO tEspecialidad VALUES('Esp10','Traumatología','Huesos y articulaciones');
+INSERT INTO tEspecialidad VALUES('Esp11','Urología','Sistema urinario');
+INSERT INTO tEspecialidad VALUES('Esp12','Endocrinología','Sistema hormonal');
+INSERT INTO tEspecialidad VALUES('Esp13','Psiquiatría','Salud mental');
+INSERT INTO tEspecialidad VALUES('Esp14','Neumología','Pulmones y sistema respiratorio');
+
+-- =========================================
+-- ENFERMEDADES 
+-- =========================================
+INSERT INTO tEnfermedad VALUES('E4','Gastritis','Inflamación del revestimiento del estómago');
+INSERT INTO tEnfermedad VALUES('E5','Dermatitis','Inflamación de la piel');
+INSERT INTO tEnfermedad VALUES('E6','Migraña','Dolor de cabeza intenso');
+INSERT INTO tEnfermedad VALUES('E7','Conjuntivitis','Inflamación de la conjuntiva ocular');
+INSERT INTO tEnfermedad VALUES('E8','Fractura de fémur','Rotura de hueso largo');
+INSERT INTO tEnfermedad VALUES('E9','Diabetes Tipo 2','Nivel elevado de glucosa');
+INSERT INTO tEnfermedad VALUES('E10','Asma Bronquial','Dificultad respiratoria crónica');
+INSERT INTO tEnfermedad VALUES('E11','Anemia','Deficiencia de glóbulos rojos');
+INSERT INTO tEnfermedad VALUES('E12','Otitis','Infección del oído');
+INSERT INTO tEnfermedad VALUES('E13','Cálculos Renales','Piedras en el riñón');
+
+-- =========================================
+-- ESPECIALIDADES POR MÉDICO
+-- =========================================
+INSERT INTO tEspecialidadDelMedico VALUES('EM4','Esp5','M3', TO_DATE('10-05-2012','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM5','Esp6','M4', TO_DATE('15-08-2005','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM6','Esp8','M5', TO_DATE('22-11-2015','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM7','Esp9','M6', TO_DATE('05-06-2018','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM8','Esp10','M7', TO_DATE('12-03-2000','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM9','Esp12','M8', TO_DATE('18-09-2014','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM10','Esp13','M9', TO_DATE('25-01-2008','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM11','Esp14','M10', TO_DATE('08-04-2010','DD-MM-YYYY'));
+-- Algunos con doble especialidad para el ejercicio 5.3
+INSERT INTO tEspecialidadDelMedico VALUES('EM12','Esp1','M11', TO_DATE('12-10-2011','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM13','Esp12','M11', TO_DATE('15-12-2020','DD-MM-YYYY'));
+INSERT INTO tEspecialidadDelMedico VALUES('EM14','Esp10','M3', TO_DATE('20-05-2022','DD-MM-YYYY'));
+
+
+-- =========================================
+-- DIAGNÓSTICOS
+-- =========================================
+INSERT INTO tDiagnostico VALUES('D3', TO_TIMESTAMP('10-03-2022 09:00:00','DD-MM-YYYY HH24:MI:SS'), 'Dolor estomacal fuerte','P03','M3');
+INSERT INTO tDiagnostico VALUES('D4', TO_TIMESTAMP('15-03-2022 11:30:00','DD-MM-YYYY HH24:MI:SS'), 'Erupción cutánea','P04','M4');
+INSERT INTO tDiagnostico VALUES('D5', TO_TIMESTAMP('20-03-2022 15:00:00','DD-MM-YYYY HH24:MI:SS'), 'Cefalea persistente','P05','M5');
+INSERT INTO tDiagnostico VALUES('D6', TO_TIMESTAMP('05-04-2022 10:00:00','DD-MM-YYYY HH24:MI:SS'), 'Ojo rojo y picazón','P06','M6');
+INSERT INTO tDiagnostico VALUES('D7', TO_TIMESTAMP('12-04-2022 16:45:00','DD-MM-YYYY HH24:MI:SS'), 'Caída con dolor en pierna','P07','M7');
+INSERT INTO tDiagnostico VALUES('D8', TO_TIMESTAMP('18-04-2022 08:20:00','DD-MM-YYYY HH24:MI:SS'), 'Control de glucosa','P08','M8');
+INSERT INTO tDiagnostico VALUES('D9', TO_TIMESTAMP('25-04-2022 14:00:00','DD-MM-YYYY HH24:MI:SS'), 'Ansiedad y estrés','P09','M9');
+INSERT INTO tDiagnostico VALUES('D10', TO_TIMESTAMP('02-05-2022 09:30:00','DD-MM-YYYY HH24:MI:SS'), 'Tos con flema crónica','P10','M10');
+INSERT INTO tDiagnostico VALUES('D11', TO_TIMESTAMP('10-05-2022 11:00:00','DD-MM-YYYY HH24:MI:SS'), 'Dolor de garganta','P11','M11');
+INSERT INTO tDiagnostico VALUES('D12', TO_TIMESTAMP('15-05-2022 12:00:00','DD-MM-YYYY HH24:MI:SS'), 'Chequeo general','P12','M1');
+
+-- =========================================
+-- ENFERMEDADES EN DIAGNÓSTICOS
+-- =========================================
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED3','E4','D3');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED4','E5','D4');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED5','E6','D5');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED6','E7','D6');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED7','E8','D7');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED8','E9','D8');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED9','E13','D9');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED10','E10','D10');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED11','E1','D11');
+INSERT INTO tEnfermedadEnElDiagnostico VALUES('ED12','E12','D12');
+-- =========================================
+-- 4. CONSULTAS PARA VERIFICAR DATOS
+-- =========================================
+
+SELECT * FROM tPaciente;
+SELECT * FROM tMedico;
+SELECT * FROM tEspecialidad;
+SELECT * FROM tEnfermedad;
+SELECT * FROM tDiagnostico;
+SELECT * FROM tEspecialidadDelMedico;
+SELECT * FROM tEnfermedadEnElDiagnostico;
+
+INSERT INTO tEspecialidad VALUES('Esp1','Otorrinolaringología','Ojos, nariz y boca');
+INSERT INTO tEspecialidad VALUES('Esp2','Pediatría','Neonato y niño');
+
+COMMIT;
+
+-- =========================================
+-- ARREGLO DE DATA (Para que las vistas tengan qué mostrar)
+-- =========================================
+-- 1. Insertamos las especialidades que faltaban (Esp1 y Esp2)
+INSERT INTO tEspecialidad (codEsp, nombreEsp, descripcionEsp) 
+SELECT 'Esp1','Otorrinolaringología','Ojos, nariz y boca' FROM DUAL 
+WHERE NOT EXISTS (SELECT 1 FROM tEspecialidad WHERE codEsp = 'Esp1');
+
+INSERT INTO tEspecialidad (codEsp, nombreEsp, descripcionEsp) 
+SELECT 'Esp2','Pediatría','Niños' FROM DUAL 
+WHERE NOT EXISTS (SELECT 1 FROM tEspecialidad WHERE codEsp = 'Esp2');
+
+-- 2. Aseguramos un médico (M1) para que el 5.1 y 5.3 brillen
+INSERT INTO tMedico (codM, paternoM, maternoM, nombresM)
+SELECT 'M1','Zela','Ramirez','Javier' FROM DUAL 
+WHERE NOT EXISTS (SELECT 1 FROM tMedico WHERE codM = 'M1');
+
+-- 3. Le damos 2 especialidades a Javier (M1) y a Luis (M11)
+INSERT INTO tEspecialidadDelMedico (codEspM, codEsp, codM) VALUES ('EM1', 'Esp1', 'M1');
+INSERT INTO tEspecialidadDelMedico (codEspM, codEsp, codM) VALUES ('EM2', 'Esp2', 'M1');
+
+COMMIT;
+
+-- =========================================
+--  Los 7 ejercicios
+-- =========================================
+
+-- 5.1. Vista: Todos los datos de médicos y especialidades
+CREATE OR REPLACE VIEW v_medico_especialidad (NOM, PAT, MAT, ESPECIALIDAD) AS
+SELECT m.nombresM, m.paternoM, m.maternoM, e.nombreEsp
+FROM tMedico m
+JOIN tEspecialidadDelMedico em ON m.codM = em.codM
+JOIN tEspecialidad e ON em.codEsp = e.codEsp;
+
+SELECT * FROM v_medico_especialidad;
+
+-- 5.2. Cantidad de especialidades por médico
+SELECT COUNT(*) AS CANTIDAD, NOM, PAT, MAT
+FROM v_medico_especialidad
+GROUP BY NOM, PAT, MAT;
+
+-- 5.3. Médicos con 2 a más especialidades (¡AHORA SÍ SALE!)
+SELECT COUNT(*) AS CANTIDAD, NOM, PAT, MAT
+FROM v_medico_especialidad
+GROUP BY NOM, PAT, MAT
+HAVING COUNT(*) >= 2;
+
+-- 5.4. Enfermedades NO detectadas (que no están en diagnósticos)
+CREATE OR REPLACE VIEW v_enf_no_detectadas (ENFERMEDAD) AS
+SELECT nombreE FROM tEnfermedad
+WHERE codE NOT IN (SELECT codE FROM tEnfermedadEnElDiagnostico);
+
+SELECT * FROM v_enf_no_detectadas;
+
+-- 5.5. Especialidades que NO tienen médicos asignados
+CREATE OR REPLACE VIEW v_esp_sin_medico (ESPECIALIDAD) AS
+SELECT nombreEsp FROM tEspecialidad
+WHERE codEsp NOT IN (SELECT codEsp FROM tEspecialidadDelMedico);
+
+SELECT * FROM v_esp_sin_medico;
+
+-- 5.6. Cuántas especialidades no tienen médico
+SELECT COUNT(*) AS TOTAL_VACIAS FROM v_esp_sin_medico;
+
+-- 5.7. Pacientes con diagnósticos sin ninguna enfermedad amarrada
+CREATE OR REPLACE VIEW v_pacientes_limpios (NOM, PAT, MAT) AS
+SELECT p.nombresP, p.paternoP, p.maternoP
+FROM tPaciente p
+JOIN tDiagnostico d ON p.codP = d.codP
+WHERE d.codD NOT IN (SELECT codD FROM tEnfermedadEnElDiagnostico);
+
+SELECT * FROM v_pacientes_limpios;
