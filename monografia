@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación - Sistema de Gestión Hospitalaria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        pre {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .code-keyword { color: #c678dd; }
+        .code-string { color: #98c379; }
+        .code-comment { color: #5c6370; italic; }
+        scroll-behavior: smooth;
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+
+    <!-- Header / Navbar -->
+    <nav class="bg-blue-600 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-hospital-alt text-2xl"></i>
+                <span class="text-xl font-bold tracking-tight">ClínicaSQL Docs</span>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium">
+                <a href="#inicio" class="hover:text-blue-200 transition">Inicio</a>
+                <a href="#entidades" class="hover:text-blue-200 transition">Entidades</a>
+                <a href="#script" class="hover:text-blue-200 transition">Script SQL</a>
+                <a href="#kpis" class="hover:text-blue-200 transition">Consultas</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="inicio" class="bg-white border-b border-slate-200 py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">
+                🏥 Sistema de Gestión Hospitalaria
+            </h1>
+            <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+                Implementación integral de una base de datos relacional en Oracle SQL para la optimización de registros médicos y especialistas.
+            </p>
+            <div class="mt-8 flex justify-center space-x-4">
+                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-bold uppercase">Oracle SQL</span>
+                <span class="bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-bold uppercase">Completado</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+        
+        <!-- Descripción -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <i class="fas fa-info-circle text-blue-500 mr-3"></i> Descripción del Proyecto
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
+                    <i class="fas fa-user-md text-4xl text-blue-500 mb-4"></i>
+                    <h3 class="font-bold mb-2">Multiespecialidad</h3>
+                    <p class="text-slate-500 text-sm">Soporte para médicos con múltiples especializaciones registradas.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
+                    <i class="fas fa-microscope text-4xl text-green-500 mb-4"></i>
+                    <h3 class="font-bold mb-2">Diagnósticos</h3>
+                    <p class="text-slate-500 text-sm">Relación precisa entre consultas y catálogo internacional de enfermedades.</p>
+                </div>
+                <div class="p-6 bg-white rounded-xl shadow-sm border border-slate-100">
+                    <i class="fas fa-database text-4xl text-purple-500 mb-4"></i>
+                    <h3 class="font-bold mb-2">Integridad</h3>
+                    <p class="text-slate-500 text-sm">Restricciones de PK/FK para garantizar la consistencia de los datos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diccionario de Entidades -->
+        <section id="entidades" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <i class="fas fa-table text-blue-500 mr-3"></i> Diccionario de Entidades
+            </h2>
+            <div class="overflow-hidden rounded-lg border border-slate-200 shadow-md">
+                <table class="w-full text-left bg-white">
+                    <thead class="bg-slate-50 border-b border-slate-200 text-slate-600 font-bold">
+                        <tr>
+                            <th class="px-6 py-4">Entidad</th>
+                            <th class="px-6 py-4">Propósito del Negocio</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="px-6 py-4 font-mono text-blue-600">tPaciente</td>
+                            <td class="px-6 py-4 text-slate-600">Datos personales y demográficos del paciente.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-mono text-blue-600">tMedico</td>
+                            <td class="px-6 py-4 text-slate-600">Información de contacto y profesional del médico.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-mono text-blue-600">tEspecialidad</td>
+                            <td class="px-6 py-4 text-slate-600">Catálogo de ramas médicas especializadas.</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-4 font-mono text-blue-600">tDiagnostico</td>
+                            <td class="px-6 py-4 text-slate-600">Registro de la consulta médica presencial.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Script Completo -->
+        <section id="script" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <i class="fas fa-code text-blue-500 mr-3"></i> Código de Implementación
+            </h2>
+            <div class="relative group">
+                <button onclick="copyCode()" class="absolute right-4 top-4 bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded text-xs transition">
+                    <i class="far fa-copy mr-1"></i> Copiar Código
+                </button>
+                <pre id="sql-code">
+<span class="code-comment">-- 1. LIMPIEZA DE TABLAS</span>
+<span class="code-keyword">DROP TABLE</span> tEnfermedadEnElDiagnostico <span class="code-keyword">CASCADE CONSTRAINTS</span>;
+<span class="code-keyword">DROP TABLE</span> tEspecialidadDelMedico <span class="code-keyword">CASCADE CONSTRAINTS</span>;
+<span class="code-keyword">DROP TABLE</span> tDiagnostico <span class="code-keyword">CASCADE CONSTRAINTS</span>;
+
+<span class="code-comment">-- 2. CREACIÓN DE ESTRUCTURAS</span>
+<span class="code-keyword">CREATE TABLE</span> tMedico (
+    codM <span class="code-keyword">VARCHAR2</span>(4) <span class="code-keyword">PRIMARY KEY</span>,
+    paternoM <span class="code-keyword">VARCHAR2</span>(50),
+    nombresM <span class="code-keyword">VARCHAR2</span>(50)
+);
+
+<span class="code-keyword">CREATE TABLE</span> tEspecialidad (
+    codEsp <span class="code-keyword">VARCHAR2</span>(4) <span class="code-keyword">PRIMARY KEY</span>,
+    nombreEsp <span class="code-keyword">VARCHAR2</span>(70)
+);
+
+<span class="code-comment">-- 3. POBLACIÓN DE DATOS</span>
+<span class="code-keyword">INSERT INTO</span> tEspecialidad <span class="code-keyword">VALUES</span>(<span class="code-string">'E1'</span>, <span class="code-string">'Cardiología'</span>);
+<span class="code-keyword">INSERT INTO</span> tEspecialidad <span class="code-keyword">VALUES</span>(<span class="code-string">'E2'</span>, <span class="code-string">'Neurología'</span>);
+<span class="code-keyword">COMMIT</span>;</pre>
+            </div>
+        </section>
+
+        <!-- Consultas Estratégicas -->
+        <section id="kpis" class="mb-16">
+            <h2 class="text-3xl font-bold mb-6 flex items-center">
+                <i class="fas fa-chart-line text-blue-500 mr-3"></i> Consultas Estratégicas (KPIs)
+            </h2>
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-500">
+                    <h4 class="font-bold text-lg mb-2">📍 Vista de Médicos Especialistas</h4>
+                    <p class="text-slate-600 mb-4 text-sm">Permite ver el nombre completo del médico junto a su especialidad asignada.</p>
+                    <pre class="bg-slate-900 text-xs text-blue-300">CREATE OR REPLACE VIEW v_medico_especialidad AS
+SELECT m.nombresM, m.paternoM, e.nombreEsp
+FROM tMedico m
+JOIN tEspecialidadDelMedico em ON m.codM = em.codM
+JOIN tEspecialidad e ON em.codEsp = e.codEsp;</pre>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-green-500">
+                    <h4 class="font-bold text-lg mb-2">📍 Médicos con 2 o más Especialidades</h4>
+                    <p class="text-slate-600 mb-4 text-sm">KPI de talento para identificar profesionales con mayor especialización.</p>
+                    <pre class="bg-slate-900 text-xs text-green-300">SELECT COUNT(*) AS TOTAL, nombresM, paternoM 
+FROM v_medico_especialidad
+GROUP BY nombresM, paternoM
+HAVING COUNT(*) >= 2;</pre>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-white transition"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fab fa-linkedin text-2xl"></i></a>
+            </div>
+            <p>&copy; 2024 Monografía Clínica SQL. Desarrollado para Laboratorio de Base de Datos.</p>
+            <p class="text-xs mt-2 uppercase tracking-widest">⚡ SQL Developer & Web Design ⚡</p>
+        </div>
+    </footer>
+
+    <script>
+        function copyCode() {
+            const code = document.getElementById('sql-code').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = code;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+            
+            // Efecto visual simple
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check text-green-400"></i> Copiado';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
